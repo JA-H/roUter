@@ -1,4 +1,6 @@
 import './App.css';
+import Maps from './components/Maps';
+import Search from './components/Search';
 
 function App() {
   return (
@@ -6,6 +8,8 @@ function App() {
       <header className="App-header">
         Welcome to roUter
       </header>
+      <Maps />
+      <Search />
     </div>
   );
 }
