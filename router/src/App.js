@@ -1,7 +1,7 @@
 import './App.css';
 import Maps from './components/Maps';
 import Search from './components/Search';
-import Journeys from './components/Journeys'
+import Journeys from './components/Journeys';
 
 import { useState } from 'react'
 
@@ -34,7 +34,15 @@ function App() {
     ]
   )
 
-  // Delete journey
+  // Journey methods
+  const AddJourney = (journey) => {
+    //Currently the add journey just takes input and output text for start location and destination
+    //Obviously the following needs to change when we start dealing with the backend
+    const id = Math.floor( Math.random()*1000 ) + 1
+    const newJourney = {id, ...journey}
+    setJourneys([...journeys, newJourney])
+  }
+
   const deleteJourney = ( id ) => {
     setJourneys( journeys.filter( (journey) => ( journey.id !== id ) ) );
   }
@@ -46,9 +54,9 @@ function App() {
       <header className="App-header">
         roUter
       </header>
-      { journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : <h2> Add a journey </h2>  }
+      <Search onAdd={AddJourney} />
+      { journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : <h2> Start a journey </h2>  }
       <Maps />
-      <Search />
     </div>
   );
 }
