@@ -35,7 +35,7 @@ function App() {
   )
 
   // Journey methods
-  const AddJourney = (journey) => {
+  const addJourney = (journey) => {
     //Currently the add journey just takes input and output text for start location and destination
     //Obviously the following needs to change when we start dealing with the backend
     const id = Math.floor( Math.random()*1000 ) + 1
@@ -54,7 +54,7 @@ function App() {
       <header className="App-header">
         roUter
       </header>
-      <Search onAdd={AddJourney} />
+      <Search onAdd={addJourney} />
       { journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : <h2> Start a journey </h2>  }
       <Maps />
     </div>
