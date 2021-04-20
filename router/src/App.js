@@ -1,4 +1,5 @@
 import './App.css';
+import Header from './components/Header';
 import Maps from './components/Maps';
 import Search from './components/Search';
 import Journeys from './components/Journeys';
@@ -51,9 +52,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        roUter
-      </header>
+      <Header />
       <Search onAdd={addJourney} />
       { journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : <h2> Start a journey </h2>  }
       <Maps />
