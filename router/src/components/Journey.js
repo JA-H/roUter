@@ -1,7 +1,9 @@
-const Journey = () => {
+const Journey = ( {journey} ) => {
     return (
-        <div>
-            
+        // Style this in a similar manner to task but with CSS identifier 'journey'
+        <div className="journey">
+            <h3>{journey.id}</h3>
+
         </div>
     )
 }
