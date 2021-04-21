@@ -29,6 +29,7 @@ function Maps() {
     )
   }
 
+  //Slightly jazzy maths, basically each zoom level is 2x the scale of the previous.
   const autoZoom = (decodedPath) => {
     let maxSpan = distance(
                             Math.min.apply(Math, decodedPath.map(function(o) { return o.lat; })), 
@@ -36,8 +37,15 @@ function Maps() {
                             Math.min.apply(Math, decodedPath.map(function(o) { return o.lng; })),
                             Math.max.apply(Math, decodedPath.map(function(o) { return o.lng; }))
                           )
-    console.log(Math.floor(20-Math.log2(maxSpan/1128.5)))
-    return(Math.floor(20-Math.log2(maxSpan/1128.5)))
+    const zoomlvl = Math.floor(20-Math.log2(maxSpan/1128.5))
+    
+    if (zoomlvl>21){
+      return(21)
+    } else if (zoomlvl<0){
+      return(0)
+    } else {
+      return(zoomlvl)
+    }
       
   }
   
