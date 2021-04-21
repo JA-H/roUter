@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-const SaveJourney = ({ onAdd, origin, dest }) => {
-    const [startLoc, setStartLoc] = useState(origin)
-    const [endLoc, setEndLoc] = useState(dest)
+const SaveJourney = ({ onAdd }) => {
+    const [startLoc, setStartLoc] = useState('')
+    const [endLoc, setEndLoc] = useState('')
 
     const onSubmit = (e) => {
         e.preventDefault()
