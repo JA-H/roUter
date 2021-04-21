@@ -4,22 +4,33 @@ import GoogleMapReact from 'google-map-react';
 import Marker from './MapMarker'
 
 //will be passing in different props later
-//for now want to figure out polyline.
+//polyline can technically be made into a component; may be worth considering later on ordering of loading but v. low priority.
+
+//props to take: polyline, ?attractions (to mark on map)
 function Maps() {
 
-  const decodedPathLongLat = window.google.maps.geometry.encoding.decodePath('y~nwFzqlbMg@W[[gAmAwA}Aa@c@MXsAbC}@bB_EtHwFiGc@g@b@f@lBtBx@uAxBcE`G_LxDgHd@ZHJFHE^XLV{AP_AQ~@W|Au@rEv@z@Z\\d@h@`AbAfAl@~C`BxGpDnBjA`Ad@z@d@HDDMXiAF[Ja@Kb@]xAw@`DSdAETBNEDI^GXWXYfA]vAs@tCe@lBYjAGZSGKGKCICIEo@UgFeBqE{AEAAFShAKj@f@Rg@SJk@RiAt@kE`@cB~ByIqCyAw@c@'); 
+  const decodedPathLongLat = window.google.maps.geometry.encoding.decodePath('umywFt_pbMf@JrAv@DBRq@Rg@fBuFtAqEXu@DMPJTNr@f@jAr@dBjAf@Tt@f@\R]Su@g@Wr@cAbDwGvSqAdECJq@?g@[k@@_@Wu@g@IN_@XQFW@SAa@MQQQYQ?s@?mC?cFDgCB[CcCB_@h@NJSr@@H@@d@ZKZICEAKDGHCN@PDJ@BB@ITGTi@[KGa@rAQf@UOTNPg@`@sAJFh@ZFUHUCCAACECM?ODMHGLAD?BBDMDMMKYOAIRu@OKZa@He@?SAc@hAmDdAeDh@eBTq@mBmAm@a@_Ao@oCiBOI?GMCgD{B_Ak@J[T_@R_@SKk@_@u@o@YKUG[EQ?P?ZDTFXJ`BnARJDQPs@D[HHHNPDRENAvBx@DUJD`@J`AXVLl@\XPh@f@Z^Zd@r@vAf@v@r@bAt@|@dAfAhA~@fAh@\NJt@DPPZVb@L`@Vd@Xd@J@RC@BPIRE\BP@^MKXRP@TBZD@LG\Aj@FH@Qr@e@Ed@D]fAABVN`@XPp@h@ZBf@hAr@iAs@Cg@i@[k@@YSe@YUQCFCDGK]m@Uc@@C?A@G?ECKCAx@kC_@LQASC?C@w@DkARiA`@iAFg@AWGqA]i@[P'); 
   const decodedPath = decodedPathLongLat.map(x => x.toJSON());
+
+  const findCenter = (decodedPath) => {
+    let center={
+      lat: (Math.min.apply(Math, decodedPath.map(function(o) { return o.lat; }))+Math.max.apply(Math, decodedPath.map(function(o) { return o.lat; })))/2,
+      lng:(Math.min.apply(Math, decodedPath.map(function(o) { return o.lng; }))+Math.max.apply(Math, decodedPath.map(function(o) { return o.lng; })))/2
+    }
+    return(center)
+  }
   
   //Will need to turn to hooks later
+  //may handle center and zoom as a function of polyline, so initially shows whole line.
+  
+  /* Zoom is a vague measure, may improve on but it's okay for now. Might force map to only focus on NY City*/
   let defaultProps = {
       markers: decodedPath,
-      // markers: [
-      //     {lat: 40.71, lng: -73.96},
-      //     {lat: 40.74, lng: -73.7},
-      //     {lat: 40.78, lng: -73.96}],
-      center: { lat: 40.71421400000001, lng: -73.9614246 },
+      center: findCenter(decodedPath),
       zoom: 11
   };
+
+  
 
   const renderPolylines = (map, maps) => {
       /** Example of rendering geodesic polyline */
@@ -64,8 +75,8 @@ function Maps() {
         defaultZoom={defaultProps.zoom}
         onGoogleApiLoaded={({map, maps}) => renderPolylines(map, maps)}
       >
-          <Marker text={'DUB'} lat={40.71} lng={-73.96} />
-          <Marker text={'YYZ'} lat={40.78} lng={-73.96} />
+          <Marker text={'START'} lat={defaultProps.markers[0].lat} lng={defaultProps.markers[0].lng} />
+          <Marker text={'END'} lat={defaultProps.markers[defaultProps.markers.length-1].lat} lng={defaultProps.markers[defaultProps.markers.length-1].lng} />
       </GoogleMapReact>
     </div>
   )
