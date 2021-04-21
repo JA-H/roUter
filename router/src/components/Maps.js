@@ -22,7 +22,7 @@ function Maps() {
 
   //want to find max between horizontal and vertical span
   const distance = (lat1, lat2, lon1, lon2) => {
-    let k = 111194.9;    // Math.PI / 180
+    let k = 111194.9;    // 2piR/360 (R is radius of earth)
     
     return(
       k*Math.max(Math.abs(lat1-lat2),Math.abs(lon1-lon2))
@@ -112,34 +112,3 @@ function Maps() {
 }
 
 export default Maps
-
-
-
-// import { Loader } from '@googlemaps/js-api-loader';
-
-// const Map = () => {
-
-    // let map;
-    // const additionalOptions = {};
-
-    // const loader = new Loader({
-    //     apiKey: "AIzaSyCzSDLwakvV-7nq3GXYc1sAapKFiAL8Fd4",
-    //     version: "weekly",
-    //     ...additionalOptions,
-//     });
-//     loader.load().then(() => {
-//         map = new google.maps.Map(document.getElementById("map"), {
-//         center: { lat: -34.397, lng: 150.644 },
-//         zoom: 8,
-//         }); 
-//     });
-
-//     return (
-//         <div onload="loader()">
-//             <div id="map">
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default Map
