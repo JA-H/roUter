@@ -6,6 +6,11 @@ import { useSelector } from 'react-redux'
 import getPolyLine from './services/stroll.js'
 import { useEffect } from 'react'
 
+import Journeys from './components/Journeys';
+
+import { useState } from 'react'
+import SaveJourney from './components/SaveJourney';
+
 function App() {
 
   let origin = useSelector(state=> state.origin)
@@ -33,26 +38,36 @@ function App() {
     
     
   }, [dest,origin])
-    
-// import Journeys from './components/Journeys';
+   
+  
+  //Placeholder data, to be replaced with data from database
+  const [journeys, setJourneys] = useState([
+    {
+        "id": 1,
+        "date_posted": "2021-04-08 20:37:10.525489",
+        "user_id": 2,
+        "start_point_long": 4.0,
+        "start_point_lat": 4.0,
+        "end_point_long": 4.0,
+        "end_point_lat": 4.0,
+        "waypoints": "[]",
+        "polyline": "something"
+    },
+    ]
+  )
 
-// import { useState } from 'react'
+  // Journey methods
+  const addJourney = (journey) => {
+    //Currently the add journey just takes input and output text for start location and destination
+    //Obviously the following needs to change when we start dealing with the backend
+    const id = Math.floor( Math.random()*1000 ) + 1
+    const newJourney = {id, ...journey}
+    setJourneys([...journeys, newJourney])
+  }
 
-
-
-
-//   // Journey methods
-//   const addJourney = (journey) => {
-//     //Currently the add journey just takes input and output text for start location and destination
-//     //Obviously the following needs to change when we start dealing with the backend
-//     const id = Math.floor( Math.random()*1000 ) + 1
-//     const newJourney = {id, ...journey}
-//     setJourneys([...journeys, newJourney])
-//   }
-
-//   const deleteJourney = ( id ) => {
-//     setJourneys( journeys.filter( (journey) => ( journey.id !== id ) ) );
-//   }
+  const deleteJourney = ( id ) => {
+    setJourneys( journeys.filter( (journey) => ( journey.id !== id ) ) );
+  }
 
 
 
@@ -61,8 +76,8 @@ function App() {
       <Header />
       Origin <Search status='origin' />
       Destination <Search status='dest'/>
-      {/* <Search onAdd={addJourney} /> */}
-      {/* journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : <h2> Start a journey </h2> */  }
+      <SaveJourney onAdd={addJourney} origin={origin} dest={dest} />
+      { journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : <h2> Start a journey </h2> }
       <Maps />
 
     </div>

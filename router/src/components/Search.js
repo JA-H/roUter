@@ -14,8 +14,6 @@ const Search = ({status}) => {
   const dispatch = useDispatch()
   let originState =  useSelector(state => state.origin)
   
-
-
   const [address,setAddress] = useState('')
 
   const handleChange = (e) => {
@@ -42,21 +40,6 @@ const Search = ({status}) => {
       
   }
   return (
-     /* <form>
-          <div>
-              <label>Start</label>
-              <input type='text' placeholder='Enter 
-              Postcode' />
-          </div> 
-          <div>
-              <label>Destination</label>
-              <input type='text' placeholder='Enter 
-              Destination' />
-          </div> 
-
-          <button type='submit' value='Go' /> 
-      </form> */
-
       <PlacesAutocomplete
       value={address}
       onChange={handleChange}
