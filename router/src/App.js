@@ -76,8 +76,8 @@ function App() {
       <Header />
       Origin <Search status='origin' />
       Destination <Search status='dest'/>
-      <SaveJourney onAdd={addJourney} origin={origin} dest={dest} />
-      { journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : <h2> Start a journey </h2> }
+      <SaveJourney onAdd={addJourney} />
+      { journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : <h2> Start a route </h2> }
       <Maps />
 
     </div>

@@ -20,27 +20,11 @@ const SaveJourney = ({ onAdd, origin, dest }) => {
 
 
     return (
-        <form onSubmit={onSubmit}>
-            <div>
-                <label>Start location</label>
-                <input 
-                    type='text' 
-                    placeholder='Enter Postcode' 
-                    value={startLoc}
-                    onChange={ (e) => setStartLoc(e.target.value)  }/>
-            </div> 
-            <div>
-                <label>Destination</label>
-                <input 
-                    type='text' 
-                    placeholder='Enter Destination'
-                    value={endLoc}
-                    onChange={ (e) => setEndLoc(e.target.value)  } />
-            </div> 
+        <form onSubmit={onSubmit}> 
             <div>
                 <input 
                     type='submit' 
-                    value='Go'
+                    value='Save route'
                     className = 'btn btn-block' />
             </div>
 
