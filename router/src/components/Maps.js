@@ -9,7 +9,7 @@ import Marker from './MapMarker'
 //props to take: polyline, ?attractions (to mark on map)
 function Maps() {
 
-  const decodedPathLongLat = window.google.maps.geometry.encoding.decodePath('umywFt_pbMf@JrAv@DBRq@Rg@fBuFtAqEXu@DMPJTNr@f@jAr@dBjAf@Tt@f@\R]Su@g@Wr@cAbDwGvSqAdECJq@?g@[k@@_@Wu@g@IN_@XQFW@SAa@MQQQYQ?s@?mC?cFDgCB[CcCB_@h@NJSr@@H@@d@ZKZICEAKDGHCN@PDJ@BB@ITGTi@[KGa@rAQf@UOTNPg@`@sAJFh@ZFUHUCCAACECM?ODMHGLAD?BBDMDMMKYOAIRu@OKZa@He@?SAc@hAmDdAeDh@eBTq@mBmAm@a@_Ao@oCiBOI?GMCgD{B_Ak@J[T_@R_@SKk@_@u@o@YKUG[EQ?P?ZDTFXJ`BnARJDQPs@D[HHHNPDRENAvBx@DUJD`@J`AXVLl@\XPh@f@Z^Zd@r@vAf@v@r@bAt@|@dAfAhA~@fAh@\NJt@DPPZVb@L`@Vd@Xd@J@RC@BPIRE\BP@^MKXRP@TBZD@LG\Aj@FH@Qr@e@Ed@D]fAABVN`@XPp@h@ZBf@hAr@iAs@Cg@i@[k@@YSe@YUQCFCDGK]m@Uc@@C?A@G?ECKCAx@kC_@LQASC?C@w@DkARiA`@iAFg@AWGqA]i@[P'); 
+  const decodedPathLongLat = window.google.maps.geometry.encoding.decodePath('y~nwFzqlbMg@W[[gAmAwA}Aa@c@MXsAbC}@bB_EtHwFiGc@g@b@f@lBtBx@uAxBcE`G_LxDgHd@ZHJFHE^XLV{AP_AQ~@yBvMWtA]hAbDlDf@V'); 
   const decodedPath = decodedPathLongLat.map(x => x.toJSON());
 
   const findCenter = (decodedPath) => {
@@ -19,6 +19,27 @@ function Maps() {
     }
     return(center)
   }
+
+  //want to find max between horizontal and vertical span
+  const distance = (lat1, lat2, lon1, lon2) => {
+    let k = 111194.9;    // Math.PI / 180
+    
+    return(
+      k*Math.max(Math.abs(lat1-lat2),Math.abs(lon1-lon2))
+    )
+  }
+
+  const autoZoom = (decodedPath) => {
+    let maxSpan = distance(
+                            Math.min.apply(Math, decodedPath.map(function(o) { return o.lat; })), 
+                            Math.max.apply(Math, decodedPath.map(function(o) { return o.lat; })),
+                            Math.min.apply(Math, decodedPath.map(function(o) { return o.lng; })),
+                            Math.max.apply(Math, decodedPath.map(function(o) { return o.lng; }))
+                          )
+    console.log(Math.floor(20-Math.log2(maxSpan/1128.5)))
+    return(Math.floor(20-Math.log2(maxSpan/1128.5)))
+      
+  }
   
   //Will need to turn to hooks later
   //may handle center and zoom as a function of polyline, so initially shows whole line.
@@ -27,7 +48,7 @@ function Maps() {
   let defaultProps = {
       markers: decodedPath,
       center: findCenter(decodedPath),
-      zoom: 11
+      zoom: autoZoom(decodedPath)
   };
 
   
