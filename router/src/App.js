@@ -1,4 +1,5 @@
 import './App.css';
+import Header from './components/Header';
 import Maps from './components/Maps';
 import Search from './components/Search';
 import { useSelector } from 'react-redux'
@@ -33,16 +34,40 @@ function App() {
     
   }, [dest,origin])
     
+// import Journeys from './components/Journeys';
+
+// import { useState } from 'react'
+
+
+
+
+//   // Journey methods
+//   const addJourney = (journey) => {
+//     //Currently the add journey just takes input and output text for start location and destination
+//     //Obviously the following needs to change when we start dealing with the backend
+//     const id = Math.floor( Math.random()*1000 ) + 1
+//     const newJourney = {id, ...journey}
+//     setJourneys([...journeys, newJourney])
+//   }
+
+//   const deleteJourney = ( id ) => {
+//     setJourneys( journeys.filter( (journey) => ( journey.id !== id ) ) );
+//   }
+
 
 
   return (
     <div className="App">
-     
-      <Maps />
-     Origin <Search status='origin' />
+      <Header />
+      Origin <Search status='origin' />
       Destination <Search status='dest'/>
+      {/* <Search onAdd={addJourney} /> */}
+      {/* journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : <h2> Start a journey </h2> */  }
+      <Maps />
+
     </div>
   );
 }
 
 export default App;
+ 
