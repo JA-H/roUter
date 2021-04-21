@@ -23,7 +23,7 @@ function App() {
     console.log(origin + dest)
 
     const response = await getPolyLine(newObject)
-    console.log('data resposne is' + response.destination)
+    console.log('data resposne is' + response)
 
     }
 
