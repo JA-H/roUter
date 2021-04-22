@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import getPolyLine from './services/stroll.js'
+import fetchJourneys from './services/fetchJourneys'
 
 import './App.css';
 import Header from './components/Header';
@@ -45,34 +46,31 @@ function App() {
     
     
   }, [dest,origin])
-   
   
-  //Placeholder data, to be replaced with data from database
-  const [journeys, setJourneys] = useState([
-    {
-        "id": 1,
-        "date_posted": "2021-04-08 20:37:10.525489",
-        "user_id": 2,
-        "start_point_long": 4.0,
-        "start_point_lat": 4.0,
-        "end_point_long": 4.0,
-        "end_point_lat": 4.0,
-        "waypoints": "[]",
-        "polyline": "something"
-    },
-    ]
-  )
+
+  // Getting the journey data
+  const [journeys, setJourneys] = useState([])
+
+  useEffect( ()=> {
+    const getJourneys = async ()=> {
+      const journeysFromServer = await fetchJourneys()
+      setJourneys(journeysFromServer)
+    }
+    getJourneys()
+  }, [])
+
 
   // Journey methods
+  const currentUrl = 'http://127.0.0.1:5000/users/2/journeys'
+
   const addJourney = (journey) => {
-    //Currently the add journey just takes input and output text for start location and destination
-    //Obviously the following needs to change when we start dealing with the backend
+    
     const id = Math.floor( Math.random()*1000 ) + 1
     const newJourney = {id, ...journey}
     setJourneys([...journeys, newJourney])
   }
 
-  const deleteJourney = ( id ) => {
+  const deleteJourney = async ( id ) => {
     setJourneys( journeys.filter( (journey) => ( journey.id !== id ) ) );
   }
 

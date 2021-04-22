@@ -7,4 +7,5 @@ const getPolyLine = async (data) => {
     return response.data
 }
 
-export default getPolyLine 
+
+export default getPolyLine
