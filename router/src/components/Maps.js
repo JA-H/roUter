@@ -1,20 +1,19 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import {useState} from 'react';
-//import {withScriptjs, withGoogleMap,GoogleMap, Polyline, Marker} from 'react-google-maps';
 
 import Marker from './MapMarker'
-import Polyline from './Polyline'
 
-//will be passing in different props later
-//polyline can technically be made into a component; may be worth considering later on ordering of loading but v. low priority.
+var geodesicPolyline;
+var nonGeodesicPolyline;
 
-//props to take: polyline, ?attractions (to mark on map)
+//props to take: ?attractions (to mark on map)
 function Maps({polyline}) {
 
   const [mapVals, setMapVals] = useState({})
 
   const onMapLoaded = (map, maps) => {
+    
     fitBounds(map, maps)
 
     setMapVals({
@@ -65,38 +64,7 @@ function Maps({polyline}) {
     }
       
   }
-  
-  //Will need to turn to hooks later
-  //may handle center and zoom as a function of polyline, so initially shows whole line.
 
-  
-
-  // const renderPolylines = (map, maps, path) => {
-
-
-  //     /** Example of rendering geodesic polyline */
-  //     let geodesicPolyline = new maps.Polyline({
-  //       path: path,
-  //       geodesic: true,
-  //       strokeColor: '#00a1e1',
-  //       strokeOpacity: 1.0,
-  //       strokeWeight: 4
-  //     })
-  //     geodesicPolyline.setMap(map)
-  
-  //     /** Example of rendering non geodesic polyline (straight line) */
-  //     let nonGeodesicPolyline = new maps.Polyline({
-  //       path: path,
-  //       geodesic: false,
-  //       strokeColor: '#e4e4e4',
-  //       strokeOpacity: 0.7,
-  //       strokeWeight: 3
-  //     })
-  //     nonGeodesicPolyline.setMap(map)
-  
-  //     fitBounds(map, maps, path)
-  // }
-  
   const fitBounds = (map, maps) => {
     var bounds = new maps.LatLngBounds()
     for (let marker of decodedPath) {
@@ -104,20 +72,39 @@ function Maps({polyline}) {
         new maps.LatLng(marker.lat, marker.lng)
       )
     }
-    console.log("actually running");
+
     map.fitBounds(bounds)
   }
 
-  const afterMapLoadChanges = () => {
-    return (
-      <div style={{display: 'none'}}>
-        <Polyline
-          map={mapVals.map}
-          maps={mapVals.maps}
-          markers={decodedPath} />
-      </div>
-    )
-  }
+  function renderPolylines (markers, map, maps) {   
+
+    /** Example of rendering geodesic polyline */
+    if (typeof geodesicPolyline !== 'undefined') {
+      geodesicPolyline.setMap(null);
+    }
+    geodesicPolyline = new maps.Polyline({
+    path: markers,
+    geodesic: true,
+    strokeColor: '#00a1e1',
+    strokeOpacity: 1.0,
+    strokeWeight: 4
+    })
+    geodesicPolyline.setMap(map)
+    
+
+    /** Example of rendering non geodesic polyline (straight line) */
+    if (typeof nonGeodesicPolyline !== 'undefined') {
+      nonGeodesicPolyline.setMap(null);
+    }
+    nonGeodesicPolyline = new maps.Polyline({
+    path: markers,
+    geodesic: false,
+    strokeColor: '#e4e4e4',
+    strokeOpacity: 0.7,
+    strokeWeight: 3
+    })
+    nonGeodesicPolyline.setMap(map)
+    }
 
 
 
@@ -131,18 +118,9 @@ function Maps({polyline}) {
         yesIWantToUseGoogleMapApiInternals
         onGoogleApiLoaded={({map, maps}) => onMapLoaded(map, maps)}
       >
-        {/* <Polyline 
-          path={decodedPath}
-          options={{ 
-          strokeColor: '#0000ff',
-          strokeOpacity: 1,
-          strokeWeight: 2
-          }}
-          visible
-        /> */}
           <Marker text={'START'} lat={decodedPath[0].lat} lng={decodedPath[0].lng} />
           <Marker text={'END'} lat={decodedPath[decodedPath.length-1].lat} lng={decodedPath[decodedPath.length-1].lng} />
-          {mapVals.mapsLoaded ? afterMapLoadChanges() : ''}
+          {mapVals.mapsLoaded ? renderPolylines(decodedPath, mapVals.map, mapVals.maps) : ''}
       </GoogleMapReact>
     </div>
   )
