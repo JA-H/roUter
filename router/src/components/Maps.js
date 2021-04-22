@@ -52,7 +52,7 @@ function Maps({polyline}) {
                             Math.min.apply(Math, decodedPath.map(function(o) { return o.lng; })),
                             Math.max.apply(Math, decodedPath.map(function(o) { return o.lng; }))
                           )
-    const zoomlvl = Math.floor(Math.log2(20-(maxSpan/1000)/1128.5))
+    const zoomlvl = Math.ceil(20-Math.log2(((maxSpan)*13.5)/1128.5))
     console.log("zoom lvl is ", zoomlvl);
     
     if (zoomlvl>21){
@@ -114,7 +114,7 @@ function Maps({polyline}) {
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyCzSDLwakvV-7nq3GXYc1sAapKFiAL8Fd4"}}
         center={findCenter(decodedPath)}
-        zoom={17/*autoZoom(decodedPath)*/}
+        zoom={autoZoom(decodedPath)}
         yesIWantToUseGoogleMapApiInternals
         onGoogleApiLoaded={({map, maps}) => onMapLoaded(map, maps)}
       >
