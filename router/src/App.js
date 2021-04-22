@@ -13,7 +13,7 @@ function App() {
   let origin = useSelector(state=> state.origin)
   let dest = useSelector(state=> state.destination)
 
-  const [polyline, setPolyline] = useState('y~nwFzqlbMg@W[[gAmAwA}Aa@c@MXsAbC}@bB_EtHwFiGc@g@b@f@lBtBx@uAxBcE`G_LxDgHd@ZHJFHE^XLV{AP_AQ~@yBvMWtA]hAbDlDf@V')
+  const [polyline, setPolyline] = useState("y~nwFzqlbMg@W[[gAmAwA}Aa@c@MXsAbC}@bB_EtHwFiGc@g@b@f@lBtBx@uAxBcE`G_LxDgHd@ZHJFHE^XLV{AP_AQ~@yBvMWtA]hAbDlDf@V");
 
   useEffect(() => {  
     const hello = async () => {
@@ -28,7 +28,7 @@ function App() {
     console.log(origin + dest)
 
     const response = await getPolyLine(newObject)
-    console.log('data resposne is' + response.polyline)
+    console.log('data resposne is ' + response.polyline)
     setPolyline(response.polyline)
 
     }
