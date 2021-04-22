@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 const SaveJourney = ({ onAdd }) => {
-    const [startLoc, setStartLoc] = useState('')
-    const [endLoc, setEndLoc] = useState('')
+    const [startLoc, setStartLoc] = useState('origin')
+    const [endLoc, setEndLoc] = useState('dest')
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -10,6 +10,7 @@ const SaveJourney = ({ onAdd }) => {
             alert('Please add start and end locations')
             return
         }
+        
 
         onAdd( {startLoc, endLoc} )
 
