@@ -9,8 +9,6 @@ import Maps from './components/Maps';
 import Search from './components/Search';
 import Journeys from './components/Journeys';
 import SaveJourney from './components/SaveJourney';
-import { useSelector } from 'react-redux'
-import getPolyLine from './services/stroll.js'
 import SignupForm from './components/Signup'
 import LoginForm from './components/Login'
 
