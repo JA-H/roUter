@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import getPolyLine from './services/stroll.js'
-import fetchJourneys from './services/fetchJourneys'
+import fetchJourneysTest from './services/fetchJourneysTest'
 
 import './App.css';
 import Header from './components/Header';
@@ -57,19 +57,17 @@ function App() {
 
   useEffect( ()=> {
     const getJourneys = async ()=> {
-      const journeysFromServer = await fetchJourneys( currentUrl )
-      setJourneys(journeysFromServer)
-      console.log(journeys)
+      const journeysFromServer = await fetchJourneysTest( currentUrl)
+      setJourneys(journeysFromServer.data)
     }
     getJourneys()
 
+  }, [journeys])
 
-  }, [])
 
 
 
   // Journey methods
-  
 
   const addJourney = (journey) => {
     
@@ -83,14 +81,13 @@ function App() {
   }
 
 
-
   return (
     <div className="App">
       <Header />
       Origin <Search status='origin' />
       Destination <Search status='dest'/>
       <SaveJourney onAdd={addJourney} />
-      { journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : '' }
+      { journeys.length > 0 ? <Journeys journeys={journeys.slice(0, Math.min( journeys.length, 3 ))} onDelete={deleteJourney} /> : '' }
       <LoginForm/>
       <Maps polyline={polyline} />
     </div>
