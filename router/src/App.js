@@ -9,7 +9,10 @@ import Maps from './components/Maps';
 import Search from './components/Search';
 import Journeys from './components/Journeys';
 import SaveJourney from './components/SaveJourney';
-
+import { useSelector } from 'react-redux'
+import getPolyLine from './services/stroll.js'
+import SignupForm from './components/Signup'
+import LoginForm from './components/Login'
 
 
 
@@ -21,6 +24,7 @@ function App() {
   let dest = useSelector(state=> state.destination)
 
   const [polyline, setPolyline] = useState("y~nwFzqlbMg@W[[gAmAwA}Aa@c@MXsAbC}@bB_EtHwFiGc@g@b@f@lBtBx@uAxBcE`G_LxDgHd@ZHJFHE^XLV{AP_AQ~@yBvMWtA]hAbDlDf@V");
+  const [attractionList, setAttractionList] = useState([])
 
   useEffect(() => {  
     const hello = async () => {
@@ -37,6 +41,8 @@ function App() {
     const response = await getPolyLine(newObject)
     console.log('data resposne is ' + response.polyline)
     setPolyline(response.polyline)
+    console.log('data response for attractions ' + response.attractions)
+    setAttractionList(response.attractions)
 
     }
 
@@ -85,8 +91,15 @@ function App() {
       <Header />
       Origin <Search status='origin' />
       Destination <Search status='dest'/>
+<<<<<<< HEAD
       <SaveJourney onAdd={addJourney} />
       { journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : '' }
+=======
+      {/* <Search onAdd={addJourney} /> */}
+      {/* journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : <h2> Start a journey </h2> */  }
+
+      <LoginForm/>
+>>>>>>> 3b962bcbd91df3b8597cfb41ea7ca7ded10813a5
       <Maps polyline={polyline} />
     </div>
   );
