@@ -7,6 +7,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addOrigin } from '../reducers/originReducer';
 import { addDestination } from '../reducers/destinationReducer';
 
+import GoogleMapReact from 'google-map-react';
+
+const searchOptions = {
+  location: new window.google.maps.LatLng(40, -74),
+  radius: 2000,
+  types: ['address']
+}
 
 
 const Search = ({status, message}) => {
@@ -44,6 +51,7 @@ const Search = ({status, message}) => {
       value={address}
       onChange={handleChange}
       onSelect={handleSelect}
+      searchOptions={searchOptions}
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div>
