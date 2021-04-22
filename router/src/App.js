@@ -35,8 +35,6 @@ function App() {
         visit_nearby_attractions: "True"
     }
 
-    console.log(origin + dest)
-
     const response = await getPolyLine(newObject)
     console.log('data response is ' + response.polyline)
     setPolyline(response.polyline)
@@ -46,9 +44,7 @@ function App() {
     }
 
     hello()
-    
-    
-    
+ 
   }, [dest,origin])
   
 
@@ -59,15 +55,28 @@ function App() {
   useEffect( ()=> {
     const getJourneys = async ()=> {
       const journeysFromServer = await fetchJourneysTest( currentUrl)
-      setJourneys(journeysFromServer.data)
+      const journeyData = await journeysFromServer.data
+      setJourneys(journeyData)
     }
+    
     getJourneys()
+    console.log(journeys)
 
   }, [])
 
+  const deleteJourney = async ( id ) => {
+    console.log("delete")
+
+    // Still getting a 405 error when I try to delete an entry
+    await fetch(`${currentUrl}/${id}`, {
+      method: 'DELETE',
+    })
+
+    setJourneys( journeys.filter( (journey) => ( journey.id !== id ) ) );
+  }
 
   const [ShowPastJourneys, setShowPastJourneys] = useState(false)
-
+  
   return (
     <div className="App">
       <Header />
@@ -76,7 +85,7 @@ function App() {
       <Search status='origin' message="Start location..." />
       <Search status='dest' message="Destination..."/>
       <ShowJourneys onAdd={ () => setShowPastJourneys(!ShowPastJourneys) } showPast={ShowPastJourneys} />
-      { ShowPastJourneys && journeys.length > 0 ? <Journeys journeys={journeys.slice(-Math.min( journeys.length, 5 ), -1)} /> : '' }
+      { ShowPastJourneys && journeys.length > 0 ? <Journeys journeys={journeys.slice(-Math.min( journeys.length, 5 ), -1)} onDelete={deleteJourney} /> : ''}
     </div>
   );
 }

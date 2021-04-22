@@ -10,7 +10,7 @@ import { addDestination } from '../reducers/destinationReducer';
 import GoogleMapReact from 'google-map-react';
 
 const searchOptions = {
-  location: new window.google.maps.LatLng(40, -74),
+  location: new window.google.maps.LatLng(40.76778893891831,-73.97898449879337),
   radius: 2000,
   types: ['address']
 }
