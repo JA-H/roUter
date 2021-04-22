@@ -84,12 +84,12 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <LoginForm/>
+      <Maps polyline={polyline} />
       <Search status='origin' message="Start location..." />
       <Search status='dest' message="Destination..."/>
       <SaveJourney onAdd={addJourney} />
-      { journeys.length > 0 ? <Journeys journeys={journeys.slice(0, Math.min( journeys.length, 3 ))} onDelete={deleteJourney} /> : '' }
-      <LoginForm/>
-      <Maps polyline={polyline} />
+      { journeys.length > 0 ? <Journeys journeys={journeys.slice(-Math.min( journeys.length, 4 ), -1)} onDelete={deleteJourney} /> : '' }
     </div>
   );
 }

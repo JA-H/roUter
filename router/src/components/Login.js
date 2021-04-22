@@ -45,17 +45,17 @@ const LoginForm = () => {
   
             <form onSubmit={loginHandler}>
   
-              <div class="input">
-                <input type="text" name="username" value={username} onChange={(e) => {setUsername(e.target.value)}} placeholder="Username..." />
+              <div class="input ">
+                <input className="location-search-input" type="text" name="username" value={username} onChange={(e) => {setUsername(e.target.value)}} placeholder="Username..." />
               </div>
   
               <div class="input">
-                <input type="text" name="email"  value={password} onChange={(e) => {setPassword(e.target.value)}} placeholder="Password"/>
+                <input className="location-search-input" type="text" name="email"  value={password} onChange={(e) => {setPassword(e.target.value)}} placeholder="Password..."/>
               </div>
   
               
                 
-              <button type="submit"> Login </button>
+              <button className="btn btn-block" type="submit"> Login </button>
             </form>
           </div>
       </div>
