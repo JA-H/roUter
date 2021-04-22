@@ -1,15 +1,19 @@
+
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Maps from './components/Maps';
 import Search from './components/Search';
 import { useSelector } from 'react-redux'
 import getPolyLine from './services/stroll.js'
-import { useEffect } from 'react'
+
 
 function App() {
 
   let origin = useSelector(state=> state.origin)
   let dest = useSelector(state=> state.destination)
+
+  const [polyline, setPolyline] = useState('y~nwFzqlbMg@W[[gAmAwA}Aa@c@MXsAbC}@bB_EtHwFiGc@g@b@f@lBtBx@uAxBcE`G_LxDgHd@ZHJFHE^XLV{AP_AQ~@yBvMWtA]hAbDlDf@V')
 
   useEffect(() => {  
     const hello = async () => {
@@ -24,7 +28,8 @@ function App() {
     console.log(origin + dest)
 
     const response = await getPolyLine(newObject)
-    console.log('data resposne is' + response.destination)
+    console.log('data resposne is' + response.polyline)
+    setPolyline(response.polyline)
 
     }
 
@@ -63,7 +68,7 @@ function App() {
       Destination <Search status='dest'/>
       {/* <Search onAdd={addJourney} /> */}
       {/* journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : <h2> Start a journey </h2> */  }
-      <Maps />
+      <Maps polyline={polyline} />
 
     </div>
   );
