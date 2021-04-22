@@ -7,9 +7,9 @@ import Marker from './MapMarker'
 //polyline can technically be made into a component; may be worth considering later on ordering of loading but v. low priority.
 
 //props to take: polyline, ?attractions (to mark on map)
-function Maps() {
+function Maps({polyline}) {
 
-  const decodedPathLongLat = window.google.maps.geometry.encoding.decodePath('y~nwFzqlbMg@W[[gAmAwA}Aa@c@MXsAbC}@bB_EtHwFiGc@g@b@f@lBtBx@uAxBcE`G_LxDgHd@ZHJFHE^XLV{AP_AQ~@yBvMWtA]hAbDlDf@V'); 
+  const decodedPathLongLat = window.google.maps.geometry.encoding.decodePath(polyline); 
   const decodedPath = decodedPathLongLat.map(x => x.toJSON());
 
   const findCenter = (decodedPath) => {
