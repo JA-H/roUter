@@ -37,7 +37,7 @@ function App() {
     console.log(origin + dest)
 
     const response = await getPolyLine(newObject)
-    console.log('data resposne is ' + response.polyline)
+    console.log('data response is ' + response.polyline)
     setPolyline(response.polyline)
     console.log('data response for attractions ' + response.attractions)
     setAttractionList(response.attractions)
