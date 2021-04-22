@@ -1,12 +1,12 @@
 import Journey from './Journey'
 
-const Journeys = ( {journeys, onDelete} ) => {
+const Journeys = ( {journeys} ) => {
     
     return (
         <div>
             <h2>Most recent routes:</h2>
             {journeys.map((journey) => 
-                (<Journey key={journey.id} journey={journey} onDelete={onDelete} /> ) 
+                (<Journey key={journey.id} journey={journey} /> ) 
             )}
 
         </div>

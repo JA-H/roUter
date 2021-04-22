@@ -8,9 +8,10 @@ import Header from './components/Header';
 import Maps from './components/Maps';
 import Search from './components/Search';
 import Journeys from './components/Journeys';
-import SaveJourney from './components/SaveJourney';
 import SignupForm from './components/Signup'
 import LoginForm from './components/Login'
+import ShowJourneys from './components/ShowJourneys.js';
+import { FaCloudShowersHeavy } from 'react-icons/fa';
 
 
 
@@ -65,21 +66,7 @@ function App() {
   }, [])
 
 
-
-
-  // Journey methods
-
-  const addJourney = (journey) => {
-    
-    const id = Math.floor( Math.random()*1000 ) + 1
-    const newJourney = {id, ...journey}
-    setJourneys([...journeys, newJourney])
-  }
-
-  const deleteJourney = async ( id ) => {
-    setJourneys( journeys.filter( (journey) => ( journey.id !== id ) ) );
-  }
-
+  const [ShowPastJourneys, setShowPastJourneys] = useState(false)
 
   return (
     <div className="App">
@@ -88,8 +75,8 @@ function App() {
       <Maps polyline={polyline} />
       <Search status='origin' message="Start location..." />
       <Search status='dest' message="Destination..."/>
-      <SaveJourney onAdd={addJourney} />
-      { journeys.length > 0 ? <Journeys journeys={journeys.slice(-Math.min( journeys.length, 4 ), -1)} onDelete={deleteJourney} /> : '' }
+      <ShowJourneys onAdd={ () => setShowPastJourneys(!ShowPastJourneys) } showPast={ShowPastJourneys} />
+      { ShowPastJourneys && journeys.length > 0 ? <Journeys journeys={journeys.slice(-Math.min( journeys.length, 5 ), -1)} /> : '' }
     </div>
   );
 }
