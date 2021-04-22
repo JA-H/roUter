@@ -18,7 +18,6 @@ const SaveJourney = ({ onAdd }) => {
 
     }
 
-
     return (
         <form onSubmit={onSubmit}> 
             <div>

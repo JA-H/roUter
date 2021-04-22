@@ -1,17 +1,19 @@
 
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux'
+import getPolyLine from './services/stroll.js'
+
 import './App.css';
 import Header from './components/Header';
 import Maps from './components/Maps';
 import Search from './components/Search';
-import { useSelector } from 'react-redux'
-import getPolyLine from './services/stroll.js'
-
-
 import Journeys from './components/Journeys';
-
-import { useState } from 'react'
 import SaveJourney from './components/SaveJourney';
+
+
+
+
+
 
 function App() {
 
@@ -81,15 +83,9 @@ function App() {
       <Header />
       Origin <Search status='origin' />
       Destination <Search status='dest'/>
-<<<<<<< HEAD
       <SaveJourney onAdd={addJourney} />
-      { journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : <h2> Start a route </h2> }
-      <Maps />
-=======
-      {/* <Search onAdd={addJourney} /> */}
-      {/* journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : <h2> Start a journey </h2> */  }
+      { journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : '' }
       <Maps polyline={polyline} />
->>>>>>> main
 
     </div>
   );
