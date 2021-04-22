@@ -70,7 +70,7 @@ const Search = ({status}) => {
               className: 'location-search-input',
             })}
           />
-          <div className="pac-container">
+          <div className="autocomplete-dropdown-container">
             {loading && <div>Loading...</div>}
             {suggestions.map(suggestion => {
               const className = suggestion.active
