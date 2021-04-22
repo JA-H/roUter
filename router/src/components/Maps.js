@@ -100,8 +100,9 @@ function Maps({polyline}) {
       <div style={{ height: '100vh', width: '100%' }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyCzSDLwakvV-7nq3GXYc1sAapKFiAL8Fd4"}}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
+        center={defaultProps.center}
+        zoom={defaultProps.zoom}
+        
         onGoogleApiLoaded={({map, maps}) => renderPolylines(map, maps)}
       >
           <Marker text={'START'} lat={defaultProps.markers[0].lat} lng={defaultProps.markers[0].lng} />
