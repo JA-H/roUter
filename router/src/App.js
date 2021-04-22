@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import getPolyLine from './services/stroll.js'
@@ -49,19 +48,24 @@ function App() {
   
 
   // Getting the journey data
+  const currentUrl = 'http://127.0.0.1:5000/users/2/journeys'
   const [journeys, setJourneys] = useState([])
 
   useEffect( ()=> {
     const getJourneys = async ()=> {
-      const journeysFromServer = await fetchJourneys()
+      const journeysFromServer = await fetchJourneys( currentUrl )
       setJourneys(journeysFromServer)
+      console.log(journeys)
     }
     getJourneys()
+
+
   }, [])
 
 
+
   // Journey methods
-  const currentUrl = 'http://127.0.0.1:5000/users/2/journeys'
+  
 
   const addJourney = (journey) => {
     
@@ -84,7 +88,6 @@ function App() {
       <SaveJourney onAdd={addJourney} />
       { journeys.length > 0 ? <Journeys journeys={journeys} onDelete={deleteJourney} /> : '' }
       <Maps polyline={polyline} />
-
     </div>
   );
 }
