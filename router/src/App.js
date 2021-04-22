@@ -62,7 +62,7 @@ function App() {
     }
     getJourneys()
 
-  }, [journeys])
+  }, [])
 
 
 
