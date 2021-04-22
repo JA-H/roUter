@@ -34,10 +34,9 @@ function Maps({polyline}) {
     return(center)
   }
 
-  //want to find max between horizontal and vertical span
+  //finds max between horizontal and vertical span: important to fit viewscreen
   const distance = (lat1, lat2, lon1, lon2) => {
     let k = 111194.9;    // 2piR/360 (R is radius of earth)
-    
     
     return(
       k*Math.max(Math.abs(lat1-lat2),Math.abs(lon1-lon2))
@@ -52,7 +51,7 @@ function Maps({polyline}) {
                             Math.min.apply(Math, decodedPath.map(function(o) { return o.lng; })),
                             Math.max.apply(Math, decodedPath.map(function(o) { return o.lng; }))
                           )
-    const zoomlvl = Math.ceil(20-Math.log2(((maxSpan)*13.5)/1128.5))
+    const zoomlvl = Math.ceil(20-Math.log2(maxSpan/83.593))
     console.log("zoom lvl is ", zoomlvl);
     
     if (zoomlvl>21){
@@ -91,7 +90,6 @@ function Maps({polyline}) {
     })
     geodesicPolyline.setMap(map)
     
-
     /** Example of rendering non geodesic polyline (straight line) */
     if (typeof nonGeodesicPolyline !== 'undefined') {
       nonGeodesicPolyline.setMap(null);
@@ -105,9 +103,6 @@ function Maps({polyline}) {
     })
     nonGeodesicPolyline.setMap(map)
     }
-
-
-
 
   return (
       <div style={{ height: '90vh', width: '100%'}}>
