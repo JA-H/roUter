@@ -84,8 +84,8 @@ function App() {
   return (
     <div className="App">
       <Header />
-      Origin <Search status='origin' />
-      Destination <Search status='dest'/>
+      <Search status='origin' message="Start location..." />
+      <Search status='dest' message="Destination..."/>
       <SaveJourney onAdd={addJourney} />
       { journeys.length > 0 ? <Journeys journeys={journeys.slice(0, Math.min( journeys.length, 3 ))} onDelete={deleteJourney} /> : '' }
       <LoginForm/>

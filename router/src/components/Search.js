@@ -9,7 +9,7 @@ import { addDestination } from '../reducers/destinationReducer';
 
 
 
-const Search = ({status}) => {
+const Search = ({status, message}) => {
 
   const dispatch = useDispatch()
   let originState =  useSelector(state => state.origin)
@@ -49,7 +49,7 @@ const Search = ({status}) => {
         <div>
           <input
             {...getInputProps({
-              placeholder: 'Search Places ...',
+              placeholder: message,
               className: 'location-search-input',
             })}
           />

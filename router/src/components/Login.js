@@ -39,25 +39,23 @@ const LoginForm = () => {
     return (
         <div class="formcont">
           <div class="blogformheading">
-            <h2>Login </h2>
+            
           </div>
           <div class="loginform"> 
   
             <form onSubmit={loginHandler}>
   
               <div class="input">
-                <p> username </p>
-                <input type="text" name="username" value={username} onChange={(e) => {setUsername(e.target.value)}} />
+                <input type="text" name="username" value={username} onChange={(e) => {setUsername(e.target.value)}} placeholder="Username..." />
               </div>
   
               <div class="input">
-                <p> password </p>
-                <input type="text" name="email"  value={password} onChange={(e) => {setPassword(e.target.value)}}/>
+                <input type="text" name="email"  value={password} onChange={(e) => {setPassword(e.target.value)}} placeholder="Password"/>
               </div>
   
               
                 
-              <button type="submit"> sign Up </button>
+              <button type="submit"> Login </button>
             </form>
           </div>
       </div>
