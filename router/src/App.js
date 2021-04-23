@@ -88,7 +88,7 @@ function App() {
     getJourneys()
     console.log(journeys)
 
-  }, [])
+  }, [dest])
 
   const deleteJourney = async ( id ) => {
     console.log("delete")
