@@ -46,7 +46,7 @@ const Search = ({status}) => {
       onSelect={handleSelect}
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-        <div>
+        <div className="innersearchwrapper">
           <input
             {...getInputProps({
               placeholder: 'Search Places ...',

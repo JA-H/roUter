@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter as Router} from 'react-router-dom'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -7,12 +8,16 @@ import {createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import originReducer from './reducers/originReducer';
 import destinationReducer from './reducers/destinationReducer'
+import loginReducer from './reducers/loginReducer'
+import journeyReducer from './reducers/journeyReducer'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 
 const reducer = combineReducers({
     origin: originReducer,
-    destination: destinationReducer
+    destination: destinationReducer,
+    user: loginReducer,
+    journey: journeyReducer
 })
 
 const store = createStore(reducer,
@@ -22,9 +27,11 @@ const store = createStore(reducer,
 
 ReactDOM.render(
   <React.StrictMode>
+    <Router>
     <Provider store={store}>
     <App />
     </Provider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import signupService from '../services/users'
+import { useDispatch } from 'react-redux';
+import signupService from '../services/users';
+import {useHistory} from 'react-router-dom'
+import {setUser} from '../reducers/loginReducer'
 
 const SignupForm = () => {
+
+    const history = useHistory()
+    const dispatch = useDispatch()
 
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -36,7 +42,10 @@ const SignupForm = () => {
 
           window.localStorage.setItem(
               'loggedUser', JSON.stringify(user)
+            
           )
+          dispatch(setUser(user))
+            history.push('/')
           setUsername('')
           setEmail('')
           setPassword('')
@@ -64,36 +73,36 @@ const SignupForm = () => {
     
     return (
       <div class="formcont">
-        <div class="blogformheading">
+        <div class="loginheader">
           <h2> Register </h2>
         </div>
-        <div class="blogform"> 
+        <div className="search"> 
 
           <form onSubmit={signupHandler}>
 
             <div class="input">
-              <p> username </p>
-              <input type="text" name="username" value={username} onChange={(e) => {setUsername(e.target.value)}} />
+              <p> Username </p>
+              <input className='location-search-input' type="text" name="username" value={username} onChange={(e) => {setUsername(e.target.value)}} />
             </div>
             
             <div class="input">
-              <p> email </p>
-              <input type="text" name="email"  value={email} onChange={(e) => {setEmail(e.target.value)}}/>
+              <p> Email </p>
+              <input className='location-search-input' type="text" name="email"  value={email} onChange={(e) => {setEmail(e.target.value)}}/>
             </div>
 
             <div class="input">
-              <p> password </p>
-              <input type="text" name="email"  value={password} onChange={(e) => {setPassword(e.target.value)}}/>
+              <p> Password </p>
+              <input className='location-search-input' type="text" name="email"  value={password} onChange={(e) => {setPassword(e.target.value)}}/>
             </div>
 
             <div class="input">
-              <p> pace </p>
-              <input type="number" name="email"  value={pace} onChange={(e) => {setPace(e.target.value)}}/>
+              <p> Pace </p>
+              <input className='location-search-input' type="number" name="email"  value={pace} onChange={(e) => {setPace(e.target.value)}}/>
             </div>
               
             <div class="input">
                 <p> Water</p>
-              <input type="radio" id="watertrue" name="water" value={water} onClick={(e)=> {setWater(true)}} />
+              <input  type="radio" id="watertrue" name="water" value={water} onClick={(e)=> {setWater(true)}} />
               <label for ="watertrue"> True </label>
               <input type="radio" id="waterfalse" name="water" value={water} onClick={(e)=> {setWater(false)}}/>
               <label for ="waterfalse"> False</label>
@@ -115,7 +124,7 @@ const SignupForm = () => {
               <label for ="buildfalse"> False </label>
             </div>
               
-            <button type="submit"> sign Up </button>
+            <button className='location-search-input'type="submit"> Sign Up </button>
           </form>
         </div>
     </div>
