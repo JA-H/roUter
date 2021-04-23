@@ -136,8 +136,8 @@ function App() {
             {user === null ?
               <LoginForm/> :
           <div className="search">
-          Origin <Search status='origin' />
-          Destination <Search status='dest'/>
+            <Search status='origin' message ="Origin" />
+            <Search status='dest' message="Destination" />
           </div>
             }
           </div>
