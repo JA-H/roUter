@@ -81,27 +81,23 @@ const SignupForm = () => {
           <form onSubmit={signupHandler}>
 
             <div class="input">
-              <p> Username </p>
-              <input className='location-search-input' type="text" name="username" value={username} onChange={(e) => {setUsername(e.target.value)}} />
+              <input className='location-search-input' type="text" name="username" value={username} onChange={(e) => {setUsername(e.target.value)}} placeholder="Username..."/>
             </div>
             
             <div class="input">
-              <p> Email </p>
-              <input className='location-search-input' type="text" name="email"  value={email} onChange={(e) => {setEmail(e.target.value)}}/>
+              <input className='location-search-input' type="text" name="email"  value={email} onChange={(e) => {setEmail(e.target.value)}} placeholder="Email..."/>
             </div>
 
             <div class="input">
-              <p> Password </p>
-              <input className='location-search-input' type="text" name="email"  value={password} onChange={(e) => {setPassword(e.target.value)}}/>
+              <input className='location-search-input' type="text" name="email"  value={password} onChange={(e) => {setPassword(e.target.value)}} placeholder="Password..."/>
             </div>
 
             <div class="input">
-              <p> Pace </p>
-              <input className='location-search-input' type="number" name="email"  value={pace} onChange={(e) => {setPace(e.target.value)}}/>
+              <input className='location-search-input' type="number" name="email"  value={pace} onChange={(e) => {setPace(e.target.value)}} placeholder="Pace"/>
             </div>
               
             <div class="input">
-                <p> Water</p>
+                <p> Water?</p>
               <input  type="radio" id="watertrue" name="water" value={water} onClick={(e)=> {setWater(true)}} />
               <label for ="watertrue"> True </label>
               <input type="radio" id="waterfalse" name="water" value={water} onClick={(e)=> {setWater(false)}}/>
@@ -109,7 +105,7 @@ const SignupForm = () => {
             </div>
 
             <div class="input">
-                <p> Green Spaces</p>
+                <p> Green Spaces? </p>
               <input type="radio" id="greentrue" name="green_spaces" value={green_spaces} onClick={(e)=> {setGreenSpaces(true)}} />
               <label for ="greentrue"> True</label>
               <input type="radio" id="greenfalse" name="green_spaces" value={green_spaces} onClick={(e)=> {setGreenSpaces(false)}}/>
@@ -117,7 +113,7 @@ const SignupForm = () => {
             </div>
 
             <div class="input">
-                <p> Buildings </p>
+                <p> Buildings? </p>
               <input type="radio" id="buildtrue" name="buildings" value={buildings} onClick={(e)=> {setBuildings(true)}}/>
               <label for ="buildtrue"> True </label>
               <input type="radio" id="buildfalse" name="buildings" value={buildings} onClick={(e)=> {setBuildings(false)}}/>

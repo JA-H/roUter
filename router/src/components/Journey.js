@@ -1,4 +1,4 @@
-import { FaTimes } from 'react-icons/fa'
+import { FaTimes, FaTrash } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import {useHistory} from 'react-router-dom'
 import { addOrigin } from '../reducers/originReducer';

@@ -44,10 +44,10 @@ code {
 /* journey CSS */
 .journey {
   background: #f4f4f4;
-  margin: 5px;
-  padding: 10px 20px;
+  margin: 3px;
+  padding: 1px 1px;
   cursor: pointer;
-
+  align-items: stretch;
 }
 
 .journey h3 {

@@ -14,6 +14,8 @@ import SignupForm from './components/Signup'
 import LoginForm from './components/Login'
 import { setUser } from './reducers/loginReducer.js';
 import { setJourneys} from './reducers/journeyReducer'
+import ShowJourneys from './components/ShowJourneys.js';
+import { FaCloudShowersHeavy } from 'react-icons/fa';
 
 
 
@@ -60,11 +62,11 @@ function App() {
       const user = JSON.parse(loggedUserJSON)
       dispatch(setUser(user))
     }
-}, [dispatch])
+  }, [dispatch])
 
   // Getting the journey data
  
-   useEffect( ()=> {
+  useEffect( ()=> {
     const getJourneys = async ()=> {
       if(user) {
         const journeysFromServer = await fetchJourneys(user.id)
@@ -82,13 +84,26 @@ function App() {
         dispatch(setJourneys(journeysFromServer.data))
      }
     }
+    
     getJourneys()
-  }, [dest,user])
+    console.log(journeys)
 
+  }, [])
 
+  const deleteJourney = async ( id ) => {
+    console.log("delete")
 
+    // Still getting a 405 error when I try to delete an entry
+    // Also wrong url currently used inthis code 
+    // await fetch(`${currentUrl}/${id}`, {
+    //   method: 'DELETE',
+    // })
 
+    setJourneys( journeys.filter( (journey) => ( journey.id !== id ) ) );
+  }
 
+  const [ShowPastJourneys, setShowPastJourneys] = useState(false)
+  
   return (
     <div>
       <div className="App">

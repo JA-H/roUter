@@ -7,9 +7,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addOrigin } from '../reducers/originReducer';
 import { addDestination } from '../reducers/destinationReducer';
 
+import GoogleMapReact from 'google-map-react';
+
+const searchOptions = {
+  location: new window.google.maps.LatLng(40.76778893891831,-73.97898449879337),
+  radius: 2000,
+  types: ['address']
+}
 
 
-const Search = ({status}) => {
+const Search = ({status, message}) => {
 
   const dispatch = useDispatch()
   let originState =  useSelector(state => state.origin)
@@ -44,12 +51,13 @@ const Search = ({status}) => {
       value={address}
       onChange={handleChange}
       onSelect={handleSelect}
+      searchOptions={searchOptions}
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div className="innersearchwrapper">
           <input
             {...getInputProps({
-              placeholder: 'Search Places ...',
+              placeholder: message,
               className: 'location-search-input',
             })}
           />

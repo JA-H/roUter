@@ -46,26 +46,24 @@ const LoginForm = () => {
 
     return (
         <div class="formcont">
-          <div class="loginheader">
-            <h2> Login </h2>
+          <div class="blogformheading">
+            
           </div>
           <div className="search"> 
   
             <form onSubmit={loginHandler}>
   
-              <div class="input">
-                <p> Username </p>
-                <input className='location-search-input'type="text" name="username" value={username} onChange={(e) => {setUsername(e.target.value)}} />
+              <div class="input ">
+                <input className="location-search-input" type="text" name="username" value={username} onChange={(e) => {setUsername(e.target.value)}} placeholder="Username..." />
               </div>
   
               <div class="input">
-                <p> Password </p>
-                <input className='location-search-input' type="text" name="email"  value={password} onChange={(e) => {setPassword(e.target.value)}}/>
+                <input className="location-search-input" type="text" name="email"  value={password} onChange={(e) => {setPassword(e.target.value)}} placeholder="Password..."/>
               </div>
   
               
                 
-              <button className='location-search-input' type="submit"> Login </button>
+              <button className="btn btn-block" type="submit"> Login </button>
             </form>
           </div>
 
